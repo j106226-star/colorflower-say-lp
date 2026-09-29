@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>找不到這個頁面｜說說花 Colorflower Say</title>
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#F6F1E9;color:#232522;
+       font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;text-align:center;padding:24px}
+  h1{font-family:"Noto Serif TC","Songti TC",serif;font-weight:600;font-size:24px;margin:0 0 12px}
+  p{margin:0 0 24px;color:#62635C;line-height:1.8}
+  a{display:inline-flex;align-items:center;height:48px;padding:0 28px;border-radius:999px;background:#232522;color:#fff;text-decoration:none}
+</style>
+</head>
+<body>
+<main>
+  <h1>找不到這個頁面</h1>
+  <p>稍後會自動帶你回到首頁。</p>
+  <a id="home" href="/">回到說說花首頁</a>
+</main>
+<script>
+  /* 算出首頁網址：
+     - 專案網站 https://帳號.github.io/儲存庫名稱/…  → 首頁是 /儲存庫名稱/
+     - 自訂網域或 帳號.github.io 本身           → 首頁是 /
+     若上一次自動導回後仍然 404（例如猜錯了），改回 / ，避免無限循環。 */
+  (function(){
+    var seg = location.pathname.split('/')[1] || '';
+    var home = (/\.github\.io$/.test(location.hostname) && seg && seg !== '404.html') ? '/' + seg + '/' : '/';
+    try {
+      var last = sessionStorage.getItem('lp404');
+      if (last && Date.now() - Number(last) < 10000) home = '/';
+      sessionStorage.setItem('lp404', String(Date.now()));
+    } catch (e) {}
+    document.getElementById('home').href = home;
+    setTimeout(function(){ location.replace(home); }, 2500);
+  })();
+</script>
+</body>
+</html>
