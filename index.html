@@ -81,13 +81,6 @@ h1 em,h2 em{font-style:normal;color:var(--coral)}
 .link{font-weight:500;letter-spacing:.08em;text-decoration:underline;text-decoration-color:var(--clay);text-decoration-thickness:2px;text-underline-offset:6px}
 .link:hover{text-decoration-color:var(--clay-deep)}
 .cta-note{font-size:13px;line-height:1.75;color:var(--ink-grey-text);margin-top:14px;letter-spacing:.04em}
-/* placeholder photo */
-.photo{position:relative;border-radius:var(--r-sm);overflow:hidden;background:
-  radial-gradient(ellipse 42% 55% at 80% 26%, rgba(255,249,238,.95), rgba(255,249,238,0) 70%),
-  radial-gradient(ellipse 30% 22% at 30% 80%, rgba(170,108,70,.5), rgba(170,108,70,0) 70%),
-  linear-gradient(160deg,#F4E9DA 0%,#E7CFB4 48%,#C99A74 100%)}
-.photo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#B9855D,#9C6A46)}
-.ph-label{position:absolute;left:12px;top:12px;z-index:2;font-size:12px;line-height:1.6;letter-spacing:.04em;background:rgba(251,248,242,.92);color:var(--ink);border-radius:var(--r-pill);padding:3px 12px}
 
 /* NAV */
 .nav{position:sticky;top:0;z-index:20;background:rgba(246,241,233,.94);backdrop-filter:blur(6px);border-bottom:1px solid rgba(35,37,34,.08)}
@@ -157,8 +150,7 @@ h1 em,h2 em{font-style:normal;color:var(--coral)}
 
 /* EMILY */
 .emily{background:var(--paper-deep)}
-.emily-grid{display:grid;gap:32px}
-.emily .photo{aspect-ratio:4/3}
+.emily-text{max-width:680px}
 .emily h2{margin-top:14px}
 .emily p{margin-top:16px}
 .emily blockquote{margin-top:24px;padding-left:18px;border-left:2px solid var(--clay);font-family:var(--serif);font-weight:500;font-size:18px;line-height:1.7}
@@ -210,19 +202,17 @@ section[id]{scroll-margin-top:72px}
 
 /* ===== HERO 瓶子（使用者提供的彩油瓶照片） ===== */
 .hero-bottles{position:relative;z-index:1;display:flex;justify-content:center;align-items:flex-end;gap:12px}
-.hb{display:block;width:78px;height:auto;filter:drop-shadow(0 12px 14px rgba(90,56,32,.22));animation:float 6s ease-in-out infinite}
-.hb2{width:98px;margin-bottom:4px;animation-delay:-2s}
+.hero-bottles{gap:14px}
+.hb{display:block;width:50px;height:auto;opacity:.88;filter:saturate(.8) drop-shadow(0 8px 10px rgba(90,56,32,.14));animation:float 6s ease-in-out infinite}
+.hb2{width:64px;margin-bottom:3px;animation-delay:-2s}
 .hb3{animation-delay:-4s}
 
 /* ===== 04 色彩探索：互動選色 ===== */
-.picker{position:relative;height:470px;max-width:360px;margin:32px auto 0}
+.picker{position:relative;height:410px;max-width:360px;margin:32px auto 0}
 .pick{position:absolute;left:var(--x);top:var(--y);width:22%;display:flex;flex-direction:column;align-items:center;background:none;border:0;padding:4px 0;cursor:pointer;font:inherit;color:inherit;border-radius:var(--r-md);transition:opacity .3s ease}
 .pick .fl{display:block;animation:float 5.5s ease-in-out infinite;animation-delay:var(--d)}
 .pick img{display:block;width:62px;height:auto;filter:drop-shadow(0 10px 12px rgba(35,37,34,.16));transition:transform .35s ease}
 .pick:hover img,.pick:focus-visible img{transform:translateY(-10px)}
-.pick .nm{margin-top:10px;font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.3;letter-spacing:.06em}
-.pick .no{font-family:var(--latin);font-weight:500;font-size:15px;line-height:1.2;letter-spacing:.12em;color:var(--clay-deep);font-variant-numeric:lining-nums}
-.pick[aria-pressed="true"] .nm{text-decoration:underline;text-decoration-color:var(--ink);text-decoration-thickness:2px;text-underline-offset:6px}
 .pick[aria-pressed="true"] img{transform:translateY(-10px)}
 .picker.has-selection .pick:not([aria-pressed="true"]){opacity:.6}
 .picker.has-selection .pick:not([aria-pressed="true"]):hover{opacity:1}
@@ -267,7 +257,8 @@ section[id]{scroll-margin-top:72px}
   .picker{height:auto;max-width:980px;display:flex;justify-content:space-between;align-items:flex-start;margin-top:40px}
   .pick{position:relative;left:auto;top:auto;width:auto;flex:1;margin-top:var(--dy)}
   .pick img{width:78px}
-  .hb{width:104px} .hb2{width:130px}
+  .hb{width:68px} .hb2{width:84px}
+  .hero-bottles{gap:20px}
   .result-card{padding:40px 36px 32px}
   .rc-grid{grid-template-columns:1fr 1fr}
   .rc-bottle{width:80px}
@@ -288,8 +279,8 @@ section[id]{scroll-margin-top:72px}
 /* ---------- desktop ---------- */
 @media (min-width:1024px){
   .pick img{width:96px}
-  .pick .nm{font-size:19px}
-  .hb{width:118px} .hb2{width:150px}
+  .hb{width:76px} .hb2{width:96px}
+  .hero-bottles{gap:24px}
   .result-card{padding:56px 56px 40px;max-width:1040px;margin:0 auto}
   .rc-grid{gap:18px}
   .rc-block{padding:26px 26px 28px}
@@ -315,8 +306,10 @@ section[id]{scroll-margin-top:72px}
   .step{padding:36px 32px}
   .after-block{padding:88px 72px 48px}
   .svc{padding:36px 32px}
-  .emily-grid{grid-template-columns:5fr 7fr;gap:80px;align-items:center}
-  .emily .photo{aspect-ratio:4/5}
+  .emily-text{max-width:640px;margin:0 auto;text-align:center}
+  .emily-text p{text-wrap:balance}
+  .emily .eyebrow{justify-content:center}
+  .emily blockquote{display:inline-block;padding:22px 0 0;border-left:0;border-top:2px solid var(--clay);margin-top:32px}
   .brand img{width:56px;height:56px}
   .faq-wrap{display:grid;grid-template-columns:4fr 8fr;gap:64px}
   .faq-list{margin-top:0}
@@ -361,6 +354,7 @@ section[id]{scroll-margin-top:72px}
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
+    fbq.disablePushState = true;   /* 選色會改網址 #color-xxx；關掉 Pixel 的「網址變動自動送 PageView」，避免 PageView 重複計算 */
     fbq('init', PIXEL_ID);
     fbq('track', 'PageView');
   }
@@ -393,10 +387,9 @@ section[id]{scroll-margin-top:72px}
       <div class="cta">
         <a class="btn btn-primary js-explore" data-cta="hero" href="#explore">探索今天的顏色 <span class="arr" aria-hidden="true">→</span></a>
       </div>
-      <div class="hero-free"><span>免費</span><span>不需要購買任何商品</span><span>這不是測驗，也沒有正確答案</span></div>
+      <div class="hero-free"><span>不需要購買任何商品</span><span>這不是測驗，也沒有正確答案</span></div>
     </div>
     <div class="hero-visual" role="img" aria-label="Aura-Soma 平衡油：B4 陽光瓶、B5 日落瓶、B20 星星的小孩">
-      <span class="ph-label">示意｜背景為色塊，正式版換窗邊暖光實拍</span>
       <div class="shelf"></div>
       <div class="hero-bottles" aria-hidden="true">
         <img class="hb hb1" src="bottles/b4.png" alt="" width="210" height="360">
@@ -455,40 +448,26 @@ section[id]{scroll-margin-top:72px}
       <p class="muted">不用想太久，第一眼吸引你的顏色，就是今天的入口。這不是測驗，也沒有正確答案。</p>
     </div>
     <div class="picker" id="picker" role="group" aria-label="選一個現在吸引你的顏色">
-      <button type="button" class="pick" data-color="red" aria-pressed="false" aria-controls="result" style="--x:2%;--y:118px;--dy:84px;--d:0s">
+      <button type="button" class="pick" data-color="red" aria-pressed="false" aria-controls="result" style="--x:1%;--y:183px;--dy:84px;--d:0s" aria-label="紅色，B5 Sunset Bottle 日落瓶">
         <span class="fl"><img src="bottles/b5.png" alt="" width="210" height="360"></span>
-        <span class="nm">紅</span><span class="no">01</span>
-        <span class="sr">紅色，B5 Sunset Bottle 日落瓶</span>
       </button>
-      <button type="button" class="pick" data-color="orange" aria-pressed="false" aria-controls="result" style="--x:21%;--y:34px;--dy:30px;--d:-1.2s">
+      <button type="button" class="pick" data-color="orange" aria-pressed="false" aria-controls="result" style="--x:8.5%;--y:56px;--dy:34px;--d:-1.2s" aria-label="橘色，B26 Etheric Rescue 乙太解救">
         <span class="fl"><img src="bottles/b26.png" alt="" width="210" height="360"></span>
-        <span class="nm">橘</span><span class="no">02</span>
-        <span class="sr">橘色，B26 Etheric Rescue 乙太解救</span>
       </button>
-      <button type="button" class="pick" data-color="yellow" aria-pressed="false" aria-controls="result" style="--x:40%;--y:0px;--dy:0px;--d:-2.4s">
+      <button type="button" class="pick" data-color="yellow" aria-pressed="false" aria-controls="result" style="--x:39%;--y:0px;--dy:8px;--d:-2.4s" aria-label="黃色，B4 Sunlight Bottle 陽光瓶">
         <span class="fl"><img src="bottles/b4.png" alt="" width="210" height="360"></span>
-        <span class="nm">黃</span><span class="no">03</span>
-        <span class="sr">黃色，B4 Sunlight Bottle 陽光瓶</span>
       </button>
-      <button type="button" class="pick" data-color="green" aria-pressed="false" aria-controls="result" style="--x:59%;--y:34px;--dy:18px;--d:-3.6s">
+      <button type="button" class="pick" data-color="green" aria-pressed="false" aria-controls="result" style="--x:69.5%;--y:56px;--dy:0px;--d:-3.6s" aria-label="綠色，B3 Heart Bottle 心輪瓶">
         <span class="fl"><img src="bottles/b3.png" alt="" width="210" height="360"></span>
-        <span class="nm">綠</span><span class="no">04</span>
-        <span class="sr">綠色，B3 Heart Bottle 心輪瓶</span>
       </button>
-      <button type="button" class="pick" data-color="blue" aria-pressed="false" aria-controls="result" style="--x:78%;--y:118px;--dy:6px;--d:-0.6s">
+      <button type="button" class="pick" data-color="blue" aria-pressed="false" aria-controls="result" style="--x:77%;--y:183px;--dy:8px;--d:-0.6s" aria-label="藍色，B2 Peace Bottle 和平瓶">
         <span class="fl"><img src="bottles/b2.png" alt="" width="210" height="360"></span>
-        <span class="nm">藍</span><span class="no">05</span>
-        <span class="sr">藍色，B2 Peace Bottle 和平瓶</span>
       </button>
-      <button type="button" class="pick" data-color="indigo" aria-pressed="false" aria-controls="result" style="--x:62%;--y:262px;--dy:42px;--d:-1.8s">
+      <button type="button" class="pick" data-color="indigo" aria-pressed="false" aria-controls="result" style="--x:55.9%;--y:285px;--dy:34px;--d:-1.8s" aria-label="寶藍色，B1 Physical Rescue 身體解救">
         <span class="fl"><img src="bottles/b1.png" alt="" width="210" height="360"></span>
-        <span class="nm">寶藍</span><span class="no">06</span>
-        <span class="sr">寶藍色，B1 Physical Rescue 身體解救</span>
       </button>
-      <button type="button" class="pick" data-color="purple" aria-pressed="false" aria-controls="result" style="--x:32%;--y:300px;--dy:92px;--d:-3s">
+      <button type="button" class="pick" data-color="purple" aria-pressed="false" aria-controls="result" style="--x:22.1%;--y:285px;--dy:84px;--d:-3s" aria-label="紫色，B20 Star Child 星星的小孩">
         <span class="fl"><img src="bottles/b20.png" alt="" width="210" height="360"></span>
-        <span class="nm">紫</span><span class="no">07</span>
-        <span class="sr">紫色，B20 Star Child 星星的小孩</span>
       </button>
     </div>
     <p class="picker-hint small muted">點一支瓶子，結果會在下方展開。</p>
@@ -536,9 +515,8 @@ section[id]{scroll-margin-top:72px}
 
 <!-- 06 EMILY -->
 <section class="emily" id="emily">
-  <div class="container emily-grid">
-    <div class="photo"><span class="ph-label">示意｜Emily 手作花藝的手部特寫（真人照片待確認）</span></div>
-    <div>
+  <div class="container">
+    <div class="emily-text">
       <div class="eyebrow">About The Creator</div>
       <h2>創作者與陪伴者 Emily</h2>
       <p>說說花由一位長期投入色彩能量、永生花藝創作與手作祝福的創作者經營。</p>
@@ -653,7 +631,7 @@ section[id]{scroll-margin-top:72px}
     "生命力",
     "勇氣"
    ],
-   "reflection": "最近有哪一件事，讓你的身體告訴你答案？",
+   "reflection": "最近哪一件事讓你感到不舒服，讓你的身體告訴你答案？",
    "meditation": "把雙腳放在地上，吸氣時感受身體被支撐；吐氣時，讓今天不需要承擔的重量慢慢落下。",
    "flower": {
     "name": "熾光・紅色針織花束",
@@ -848,7 +826,14 @@ section[id]{scroll-margin-top:72px}
      作用：開啟和官方帳號的聊天室，並把文字預先填進輸入框；使用者可以修改，要自己按送出（不會自動送出）。
      提醒：上線前請用 iPhone、Android、FB／IG 內建瀏覽器實測；
            尚未加好友的人，LINE 可能會先顯示官方帳號頁面。 */
-  function lineMessageUrl(text){ return 'https://line.me/R/oaMessage/' + LINE_ID + '/?' + encodeURIComponent(text); }
+  /* 電腦版：oaMessage 連結會被 LINE 導到 line.me 首頁，所以電腦改用官方帳號加好友頁（顯示 QR Code），並開新分頁；
+     手機（iOS／Android，含 LINE、FB、IG 內建瀏覽器）才使用預填訊息連結。 */
+  var IS_MOBILE = (function(){
+    var ua = navigator.userAgent || '';
+    return /Android|iPhone|iPad|iPod|Mobile|Windows Phone|Line\/|FBAN|FBAV|FB_IAB|Instagram/i.test(ua) ||
+      (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);   // iPadOS 預設顯示成 Mac
+  })();
+  function lineMessageUrl(text){ return IS_MOBILE ? 'https://line.me/R/oaMessage/' + LINE_ID + '/?' + encodeURIComponent(text) : LINE_ADD_FRIEND; }
   function lineTextFor(c){ return '你好，我今天選到的是' + c.displayName + '，想了解靈性彩油解讀'; }
 
   var DATA = JSON.parse(document.getElementById('color-data').textContent);
@@ -907,7 +892,7 @@ section[id]{scroll-margin-top:72px}
         '<p>如果看完今天的顏色，還想有人陪你把心裡的話慢慢說完，可以加 LINE 預約靈性彩油解讀。</p>' +
         '<div class="cta-side">' +
           '<a class="btn btn-primary js-line" data-cta="result" data-color="' + c.id + '" href="' + esc(lineMessageUrl(text)) + '">加 LINE 預約・詢問 <span class="arr" aria-hidden="true">→</span></a>' +
-          '<p class="rc-note">會開啟 LINE，並預先填好「' + esc(text) + '」，可以修改後再送出。</p>' +
+          '<p class="rc-note">' + (IS_MOBILE ? '會開啟 LINE，並預先填好「' + esc(text) + '」，可以修改後再送出。' : '電腦上會顯示 LINE 官方帳號的 QR Code，用手機 LINE 掃描加入後，可以傳「' + esc(text) + '」給我們。') + '</p>' +
           '<a class="link rc-plain js-line" data-cta="result_add_friend" data-color="' + c.id + '" href="' + LINE_ADD_FRIEND + '">或直接加入 LINE 好友 ' + LINE_ID + '</a>' +
         '</div>' +
       '</div>' +
@@ -985,7 +970,13 @@ section[id]{scroll-margin-top:72px}
   document.addEventListener('click', function(e){
     var a = e.target.closest('a.js-explore, a.js-line'); if (!a) return;
     if (a.classList.contains('js-explore')) track('click_explore', { lp_cta: a.dataset.cta || '' });
-    else track('click_line', { lp_cta: a.dataset.cta || '', color: a.dataset.color || state.color || '' });
+    else {
+      track('click_line', { lp_cta: a.dataset.cta || '', color: a.dataset.color || state.color || '' });
+      if (!IS_MOBILE){   // 電腦：保險起見改成加好友頁，並開新分頁（本頁留著，追蹤也能送完）
+        if (/\/oaMessage\//.test(a.href)) a.href = LINE_ADD_FRIEND;
+        a.target = '_blank'; a.rel = 'noopener';
+      }
+    }
   });
 
   /* ========== 6. 手機底部 CTA ========== */
