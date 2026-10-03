@@ -241,6 +241,14 @@ section[id]{scroll-margin-top:72px}
 .rc-question{font-family:var(--serif);font-weight:500;font-size:18px!important;line-height:1.7!important}
 .rc-close{font-size:13px!important;color:var(--ink-grey-text)}
 .rc-soon{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.08em;border:1px solid var(--ink-grey);color:var(--ink-grey-text);border-radius:var(--r-pill);padding:2px 12px}
+.rc-flower-buy{display:grid;gap:18px}
+.rc-flower-img{display:block;width:100%;max-width:320px;height:auto;border-radius:var(--r-sm);background:#fff}
+.rc-flower-type{display:inline-block;margin-top:10px;font-size:13px;letter-spacing:.06em;color:var(--ink-grey-text)}
+.rc-flower-buy h4{margin-top:4px!important}
+.rc-spec{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;margin-top:14px!important;padding-top:12px;border-top:1px solid rgba(35,37,34,.12)}
+.rc-spec .sz{font-size:14px;color:var(--ink-grey-text);letter-spacing:.04em}
+.rc-price{font-family:var(--latin);font-weight:600;font-size:22px;line-height:1.2;color:var(--ink);letter-spacing:.04em;font-variant-numeric:lining-nums}
+.rc-flower-buy .btn{margin-top:18px}
 .rc-cta{margin-top:18px;background:var(--clay-mist);border-radius:var(--r-md);padding:26px 22px}
 .rc-cta .eyebrow{color:var(--clay-deep)}
 .rc-cta h4{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.45;margin-top:10px}
@@ -262,6 +270,9 @@ section[id]{scroll-margin-top:72px}
   .result-card{padding:40px 36px 32px}
   .rc-grid{grid-template-columns:1fr 1fr}
   .rc-bottle{width:80px}
+  .rc-block.is-available,.rc-grid.has-shop>.rc-block:nth-child(5){grid-column:1 / -1}   /* 有可購買作品時，05、06 各佔整列，避免右邊空一格 */
+  .rc-flower-buy{grid-template-columns:5fr 7fr;gap:32px;align-items:center}
+  .rc-flower-img{max-width:none}
   .rc-share .lab{width:auto;margin-right:4px}
   :root{--pad-x:48px;--sec-y:96px}
   h1{font-size:52px} h2{font-size:32px} h3{font-size:23px}
@@ -325,7 +336,7 @@ section[id]{scroll-margin-top:72px}
   填好後會自動送出：GA4 page_view、Pixel PageView；頁面互動事件見頁尾 track()：
     click_explore → Pixel trackCustom ExploreClick
     select_color  → Pixel trackCustom ColorSelected {color: 'red' …}
-    click_line    → Pixel 標準事件 Contact
+    click_line    → Pixel 標準事件 Contact（花藝「LINE 詢問購買」：lp_cta=flower_buy，另帶 content_name＝作品名稱）
     share         → Pixel trackCustom ShareColor
 -->
 <script>
@@ -776,8 +787,14 @@ section[id]{scroll-margin-top:72px}
    "flower": {
     "name": "夜知・靛色鐘罩花",
     "type": "桌面花藝",
-    "description": "一座被玻璃安靜收好的直覺，留在桌邊，也留在心裡。",
-    "status": "即將推出"
+    "description": "安靜地陪伴你，留在桌邊，也留在心裡。",
+    "available": true,
+    "image": "flowers/indigo-dome.jpg",
+    "imageAlt": "夜知・靛色鐘罩花：玻璃鐘罩寶藍色永生花作品",
+    "imageWidth": 720,
+    "imageHeight": 960,
+    "size": "9 × 12 cm",
+    "price": "NT$880"
    },
    "file": "b1.png",
    "dot": "#3568C8"
@@ -863,6 +880,25 @@ section[id]{scroll-margin-top:72px}
   var result = document.getElementById('result');
   function esc(v){ return String(v).replace(/[&<>"]/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]; }); }
 
+  /* 06 花藝作品：available 為 true 時顯示照片、尺寸、價格與「LINE 詢問購買」；否則維持「即將推出」 */
+  function flowerBuyText(f){ return '你好，我想詢問購買「' + f.name + '」（' + f.price + '）'; }
+  function renderFlower(c){
+    var f = c.flower;
+    if (!f.available){
+      return '<section class="rc-block"><div class="rc-label"><b>06</b>' + esc(T.flowerLabel) + '</div><h4>' + esc(f.name) + '</h4><p>' + esc(f.description) + '</p><span class="rc-soon">' + esc(f.status) + '</span></section>';
+    }
+    return '<section class="rc-block is-available"><div class="rc-label"><b>06</b>' + esc(T.flowerLabel) + '</div>' +
+      '<div class="rc-flower-buy">' +
+        '<img class="rc-flower-img" src="' + esc(f.image) + '" alt="' + esc(f.imageAlt || f.name) + '" width="' + esc(f.imageWidth) + '" height="' + esc(f.imageHeight) + '" loading="lazy" decoding="async">' +
+        '<div>' +
+          '<h4>' + esc(f.name) + '</h4>' +
+          '<p>' + esc(f.description) + '</p>' +
+          '<p class="rc-spec"><span class="sz">尺寸 ' + esc(f.size) + '</span><span class="rc-price">' + esc(f.price) + '</span></p>' +
+          '<a class="btn btn-secondary js-line" data-cta="flower_buy" data-color="' + c.id + '" data-content-name="' + esc(f.name) + '" href="' + esc(lineMessageUrl(flowerBuyText(f))) + '">LINE 詢問購買 <span class="arr" aria-hidden="true">→</span></a>' +
+        '</div>' +
+      '</div></section>';
+  }
+
   function renderResult(c){
     var text = lineTextFor(c);
     return '' +
@@ -876,7 +912,7 @@ section[id]{scroll-margin-top:72px}
           '<p class="rc-meta">' + esc(T.bottleLabel) + '｜' + esc(c.chakra) + '｜' + esc(c.bottle.pair) + '</p>' +
         '</div>' +
       '</header>' +
-      '<div class="rc-grid">' +
+      '<div class="rc-grid' + (c.flower.available ? ' has-shop' : '') + '">' +
         '<section class="rc-block"><div class="rc-label"><b>01</b>給自己的提醒</div><p class="rc-quote">' + esc(c.reminder) + '</p></section>' +
         '<section class="rc-block"><div class="rc-label"><b>02</b>' + esc(T.chakraLabel) + '</div><h4>' + esc(c.chakra) + '</h4><p>' + esc(c.chakraDescription) + '</p></section>' +
         '<section class="rc-block"><div class="rc-label"><b>03</b>' + esc(T.keywordsLabel) + '</div>' +
@@ -884,7 +920,7 @@ section[id]{scroll-margin-top:72px}
           '<button type="button" class="rc-mini" data-action="copy">複製正向詞</button></section>' +
         '<section class="rc-block"><div class="rc-label"><b>04</b>' + esc(T.reflectionLabel) + '</div><p class="rc-lead">' + esc(T.questionLead) + '</p><p class="rc-question">' + esc(c.reflection) + '</p></section>' +
         '<section class="rc-block"><div class="rc-label"><b>05</b>' + esc(T.meditationEyebrow) + '</div><h4>' + esc(T.meditationTitle) + '</h4><p>' + esc(c.meditation) + '</p><p class="rc-close">' + esc(T.meditationClosing) + '</p></section>' +
-        '<section class="rc-block"><div class="rc-label"><b>06</b>' + esc(T.flowerLabel) + '</div><h4>' + esc(c.flower.name) + '</h4><p>' + esc(c.flower.description) + '</p><span class="rc-soon">' + esc(c.flower.status) + '</span></section>' +
+        renderFlower(c) +
       '</div>' +
       '<div class="rc-cta">' +
         '<div class="eyebrow">After The Colors</div>' +
@@ -971,7 +1007,9 @@ section[id]{scroll-margin-top:72px}
     var a = e.target.closest('a.js-explore, a.js-line'); if (!a) return;
     if (a.classList.contains('js-explore')) track('click_explore', { lp_cta: a.dataset.cta || '' });
     else {
-      track('click_line', { lp_cta: a.dataset.cta || '', color: a.dataset.color || state.color || '' });
+      var lp = { lp_cta: a.dataset.cta || '', color: a.dataset.color || state.color || '' };
+      if (a.dataset.contentName) lp.content_name = a.dataset.contentName;   // 例：flower_buy → 作品名稱
+      track('click_line', lp);
       if (!IS_MOBILE){   // 電腦：保險起見改成加好友頁，並開新分頁（本頁留著，追蹤也能送完）
         if (/\/oaMessage\//.test(a.href)) a.href = LINE_ADD_FRIEND;
         a.target = '_blank'; a.rel = 'noopener';
