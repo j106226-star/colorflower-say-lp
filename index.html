@@ -261,7 +261,6 @@ section[id]{scroll-margin-top:72px}
 .rc-spec .sz{font-size:14px;color:var(--ink-grey-text);letter-spacing:.04em}
 .rc-price{font-family:var(--latin);font-weight:600;font-size:22px;line-height:1.2;color:var(--ink);letter-spacing:.04em;font-variant-numeric:lining-nums}
 .rc-flower-buy .btn{margin-top:18px}
-.rc-added{margin-top:10px;min-height:1.7em;font-size:15px;font-weight:500;line-height:1.7;color:#232522}
 /* 購物車：有作品才出現的懸浮按鈕，以及同一頁的抽屜 */
 .cart-fab{position:fixed;right:16px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:35;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border:0;border-radius:var(--r-pill);background:#232522;color:#fff;font:inherit;font-size:15px;font-weight:500;letter-spacing:.08em;cursor:pointer;box-shadow:0 8px 24px rgba(35,37,34,.18)}
 .cart-fab-count{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:var(--r-pill);background:#FBF8F2;color:#232522;font-size:13px;font-weight:700;letter-spacing:0;font-variant-numeric:lining-nums}
@@ -964,8 +963,7 @@ section[id]{scroll-margin-top:72px}
           '<h4>' + esc(f.name) + '</h4>' +
           '<p>' + esc(f.description) + '</p>' +
           '<p class="rc-spec"><span class="sz">尺寸 ' + esc(f.size) + '</span><span class="rc-price">' + esc(f.price) + '</span></p>' +
-          '<button type="button" class="btn btn-secondary" data-action="add-cart" data-color="' + c.id + '">加入購物車</button>' +
-          '<p class="rc-added" role="status" aria-live="polite"></p>' +
+          '<button type="button" class="btn btn-secondary" data-action="add-cart" data-color="' + c.id + '" aria-live="polite" aria-atomic="true">加入購物車</button>' +
           '<p class="rc-note">可以一次加入多件，再從購物車用 LINE 送出。運費與付款方式會在 LINE 上確認。</p>' +
         '</div>' +
       '</div></section>';
@@ -1124,6 +1122,17 @@ section[id]{scroll-margin-top:72px}
   function pixel(eventName, params){
     if (typeof window.fbq === 'function') window.fbq('track', eventName, params);
   }
+  var cartAddedTimer = 0;
+  function flashCartAdded(btn){
+    clearTimeout(cartAddedTimer);
+    btn.textContent = '已加入 ✓';
+    cartAddedTimer = setTimeout(function(){
+      btn.setAttribute('aria-live', 'off');
+      btn.textContent = '加入購物車';
+      btn.setAttribute('aria-live', 'polite');
+      cartAddedTimer = 0;
+    }, 1500);
+  }
   function addToCart(id){
     var c = BY_ID[id]; if (!c || !c.flower || !c.flower.available) return;
     var found = null;
@@ -1244,8 +1253,7 @@ section[id]{scroll-margin-top:72px}
       (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function(){ el.textContent = '已複製'; }, function(){ el.textContent = txt; });
     } else if (act === 'add-cart'){
       addToCart(c.id);
-      var added = el.closest('.rc-flower-buy').querySelector('.rc-added');
-      if (added) added.textContent = '已加入購物車';
+      flashCartAdded(el);
     } else if (act === 'share-line'){
       track('share', { method: 'line', content_type: 'color_result', item_id: c.id, color: c.id });
       openWin('https://line.me/R/share?text=' + encodeURIComponent('說說花 Colorflower Say｜我今天的顏色是' + c.displayName + '\n' + shareUrl(c.id, 'line')));
