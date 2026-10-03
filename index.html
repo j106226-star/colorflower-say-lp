@@ -261,10 +261,40 @@ section[id]{scroll-margin-top:72px}
 .rc-spec .sz{font-size:14px;color:var(--ink-grey-text);letter-spacing:.04em}
 .rc-price{font-family:var(--latin);font-weight:600;font-size:22px;line-height:1.2;color:var(--ink);letter-spacing:.04em;font-variant-numeric:lining-nums}
 .rc-flower-buy .btn{margin-top:18px}
-.rc-order-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
-.rc-order-actions .rc-mini{margin-top:18px}
-.rc-order-status{font-size:13px!important;line-height:1.75!important;color:var(--clay-deep);margin-top:8px!important;min-height:1.75em}
-.rc-order-fallback{display:block;width:100%;margin-top:8px;font:inherit;font-size:13px;line-height:1.7;padding:8px 10px;border:1px solid rgba(35,37,34,.2);border-radius:var(--r-sm);background:#fff;color:var(--ink)}
+.rc-added{margin-top:10px;min-height:1.7em;font-size:15px;font-weight:500;line-height:1.7;color:#232522}
+/* 購物車：有作品才出現的懸浮按鈕，以及同一頁的抽屜 */
+.cart-fab{position:fixed;right:16px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:35;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border:0;border-radius:var(--r-pill);background:#232522;color:#fff;font:inherit;font-size:15px;font-weight:500;letter-spacing:.08em;cursor:pointer;box-shadow:0 8px 24px rgba(35,37,34,.18)}
+.cart-fab-count{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:var(--r-pill);background:#FBF8F2;color:#232522;font-size:13px;font-weight:700;letter-spacing:0;font-variant-numeric:lining-nums}
+.cart-fab[hidden],.cart-drawer[hidden]{display:none!important}
+.cart-drawer{position:fixed;inset:0;z-index:60}
+.cart-backdrop{position:absolute;inset:0;background:rgba(35,37,34,.45);border:0;padding:0}
+.cart-panel{position:absolute;top:0;right:0;bottom:0;width:min(100%,440px);background:#FBF8F2;color:#232522;display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(35,37,34,.16)}
+.cart-panel:focus{outline:none}
+.cart-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 18px 14px;border-bottom:1px solid rgba(35,37,34,.1)}
+.cart-head h2{font-size:22px;line-height:1.35}
+.cart-close{background:none;border:0;padding:8px 0;font:inherit;font-size:15px;font-weight:500;letter-spacing:.06em;color:#232522;text-decoration:underline;text-decoration-color:var(--clay);text-underline-offset:5px;cursor:pointer}
+.cart-body{flex:1;overflow:auto;padding:8px 18px 18px}
+.cart-empty{padding:28px 4px;font-size:16px;line-height:1.8;color:#232522}
+.cart-empty p+p{margin-top:8px;color:#232522}
+.cart-item{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid rgba(35,37,34,.1)}
+.cart-item img{width:72px;height:72px;object-fit:cover;border-radius:var(--r-sm);background:#fff}
+.cart-item h3{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.45}
+.cart-meta{margin-top:4px;font-size:14px;line-height:1.6;color:#232522}
+.cart-unit{font-variant-numeric:lining-nums}
+.cart-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:10px}
+.cart-qty{display:inline-flex;align-items:center;border:1px solid rgba(35,37,34,.28);border-radius:var(--r-pill);overflow:hidden}
+.cart-qtybtn{width:36px;height:36px;border:0;background:#fff;color:#232522;font:inherit;font-size:18px;line-height:1;cursor:pointer}
+.cart-qtybtn:disabled{color:#8a8b84;cursor:default}
+.cart-qty span{min-width:28px;text-align:center;font-size:15px;font-weight:500;font-variant-numeric:lining-nums}
+.cart-remove{background:none;border:0;padding:8px 0;font:inherit;font-size:14px;font-weight:500;color:#232522;text-decoration:underline;text-decoration-color:var(--clay);text-underline-offset:4px;cursor:pointer}
+.cart-foot{flex:none;padding:14px 18px calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgba(35,37,34,.1);background:#FBF8F2}
+.cart-sub{display:flex;justify-content:space-between;align-items:baseline;font-size:16px;font-weight:500}
+.cart-sub b{font-family:var(--latin);font-weight:600;font-size:26px;letter-spacing:.03em;font-variant-numeric:lining-nums}
+.cart-ship{margin-top:8px;font-size:15px;line-height:1.7;color:#232522}
+.cart-foot .btn{width:100%;margin-top:14px}
+.cart-copy-status{margin-top:10px;font-size:15px;font-weight:500;line-height:1.7;color:#232522;background:#FBF8F2}
+.cart-fallback{display:block;width:100%;margin-top:8px;font:inherit;font-size:14px;line-height:1.7;padding:8px 10px;border:1px solid rgba(35,37,34,.28);border-radius:var(--r-sm);background:#fff;color:#232522}
+.cart-fab:focus-visible,.cart-close:focus-visible,.cart-qtybtn:focus-visible,.cart-remove:focus-visible{outline:2px solid var(--clay-deep);outline-offset:3px}
 .rc-cta{margin-top:18px;background:var(--clay-mist);border-radius:var(--r-md);padding:26px 22px}
 .rc-cta .eyebrow{color:var(--clay-deep)}
 .rc-cta h4{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.45;margin-top:10px}
@@ -301,6 +331,7 @@ section[id]{scroll-margin-top:72px}
   .final .btns{flex-direction:row;justify-content:center;max-width:none}
   .footer-grid{grid-template-columns:1.4fr 1fr 1fr}
   .sticky-cta{display:none}
+  .cart-fab{bottom:24px}
   .flow{grid-template-columns:repeat(4,1fr)}
 }
 /* ---------- desktop ---------- */
@@ -352,8 +383,10 @@ section[id]{scroll-margin-top:72px}
   填好後會自動送出：GA4 page_view、Pixel PageView；頁面互動事件見頁尾 track()：
     click_explore → Pixel trackCustom ExploreClick
     select_color  → Pixel trackCustom ColorSelected {color: 'red' …}
-    click_line    → Pixel 標準事件 Contact（花藝「LINE 訂購這件作品」：lp_cta=flower_buy，另帶 content_name＝作品名稱）
-    copy_order    → 只記在 GA4／window.lpEvents（電腦版「複製訂購內容」；不送 Pixel）
+    click_line    → Pixel 標準事件 Contact（預約／詢問的 LINE 按鈕，不是購物車結帳）
+    add_to_cart   → Pixel 標準事件 AddToCart（value 880、currency TWD；只有頁面上已經有 fbq 時才送）
+    begin_checkout→ Pixel 標準事件 InitiateCheckout（「用 LINE 送出訂單」；只有頁面上已經有 fbq 時才送）
+    copy_order    → 只記在 GA4／window.lpEvents（電腦版購物車「複製訂購內容」；不送 Pixel）
     share         → Pixel trackCustom ShareColor
 -->
 <script>
@@ -624,6 +657,20 @@ section[id]{scroll-margin-top:72px}
 <div class="sticky-cta" id="stickyCta" aria-hidden="true">
   <a class="btn btn-primary btn-block js-explore" id="stickyExplore" data-cta="sticky" href="#explore" tabindex="-1">探索今天的顏色 <span class="arr" aria-hidden="true">→</span></a>
   <a class="btn btn-primary btn-block js-line" id="stickyLine" data-cta="sticky" href="https://line.me/R/ti/p/@917voqon" tabindex="-1" hidden>加 LINE 預約・詢問 <span class="arr" aria-hidden="true">→</span></a>
+</div>
+
+<!-- 花藝購物車：有作品才顯示按鈕；抽屜在同一頁，不另開結帳頁 -->
+<button type="button" class="cart-fab" id="cartFab" hidden aria-haspopup="dialog" aria-controls="cartPanel">購物車 <span class="cart-fab-count" id="cartFabCount">0</span></button>
+<div class="cart-drawer" id="cartDrawer" hidden>
+  <div class="cart-backdrop" data-cart="close"></div>
+  <div class="cart-panel" id="cartPanel" role="dialog" aria-modal="true" aria-labelledby="cartTitle" tabindex="-1">
+    <header class="cart-head">
+      <h2 id="cartTitle">購物車</h2>
+      <button type="button" class="cart-close" data-cart="close">關閉</button>
+    </header>
+    <div class="cart-body" id="cartBody"></div>
+    <div class="cart-foot" id="cartFoot" hidden></div>
+  </div>
 </div>
 
 <!-- 七色探索內容：逐字取自 Manus 網站（完整版與來源說明見 color-results.json）。移植到 Lovable 時可直接改成 import JSON -->
@@ -903,23 +950,8 @@ section[id]{scroll-margin-top:72px}
   var result = document.getElementById('result');
   function esc(v){ return String(v).replace(/[&<>"]/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]; }); }
 
-  /* 06 花藝作品：available 為 true 時顯示照片、尺寸、價格與「LINE 訂購這件作品」；否則維持「即將推出」（不顯示價格、沒有按鈕）
-     一次訂一件：手機開啟 LINE 並預填下面的訂購內容；電腦開啟官方帳號頁（QR Code），另有「複製訂購內容」按鈕。
-     不收個資、不寫運費：稱呼／手機／取貨方式留給客人在 LINE 裡填，由官方回覆運費與付款方式。 */
-  function flowerBuyText(f, c){
-    return [
-      '你好，我想訂購這件作品：',
-      '・作品：' + f.name,
-      '・價格：' + f.price,
-      '・尺寸：' + f.size,
-      '・數量：1',
-      '稱呼：',
-      '手機：',
-      '取貨方式／門市：',
-      '（來自：色彩探索・' + c.displayName + '）',
-      '麻煩幫我確認訂單與付款方式，謝謝！'
-    ].join('\n');
-  }
+  /* 06 花藝作品：available 為 true 時顯示照片、尺寸、價格與「加入購物車」；否則維持「即將推出」（不顯示價格、沒有按鈕）。
+     結帳在購物車：不收個資、不寫死運費，用 LINE 一次送出整車訂單。 */
   function renderFlower(c){
     var f = c.flower;
     if (!f.available){
@@ -932,12 +964,9 @@ section[id]{scroll-margin-top:72px}
           '<h4>' + esc(f.name) + '</h4>' +
           '<p>' + esc(f.description) + '</p>' +
           '<p class="rc-spec"><span class="sz">尺寸 ' + esc(f.size) + '</span><span class="rc-price">' + esc(f.price) + '</span></p>' +
-          '<div class="rc-order-actions">' +
-            '<a class="btn btn-secondary js-line" data-cta="flower_buy" data-color="' + c.id + '" data-content-name="' + esc(f.name) + '" href="' + esc(lineMessageUrl(flowerBuyText(f, c))) + '">LINE 訂購這件作品 <span class="arr" aria-hidden="true">→</span></a>' +
-            (IS_MOBILE ? '' : '<button type="button" class="rc-mini" data-action="copy-order">複製訂購內容</button>') +
-          '</div>' +
-          '<p class="rc-note">' + (IS_MOBILE ? '會開啟 LINE，並預先填好這件作品的訂購內容，補上稱呼、手機和取貨方式後再送出。' : '電腦上會開啟 LINE 官方帳號頁面（QR Code）。可以先按「複製訂購內容」，加入好友後貼到 LINE 對話送出。') + '</p>' +
-          (IS_MOBILE ? '' : '<p class="rc-order-status" role="status" aria-live="polite"></p>') +
+          '<button type="button" class="btn btn-secondary" data-action="add-cart" data-color="' + c.id + '">加入購物車</button>' +
+          '<p class="rc-added" role="status" aria-live="polite"></p>' +
+          '<p class="rc-note">可以一次加入多件，再從購物車用 LINE 送出。運費與付款方式會在 LINE 上確認。</p>' +
         '</div>' +
       '</div></section>';
   }
@@ -1039,28 +1068,184 @@ section[id]{scroll-margin-top:72px}
     });
   }
   function openWin(url){ var w = window.open(url, '_blank', 'noopener,noreferrer'); if (!w) location.href = url; }
+
+  /* ========== 4b. 花藝購物車（localStorage；結帳只組 LINE 訊息，不收個資、不寫運費） ========== */
+  var CART_KEY = 'colorflower-say-cart';
+  var cartFab = document.getElementById('cartFab');
+  var cartFabCount = document.getElementById('cartFabCount');
+  var cartDrawer = document.getElementById('cartDrawer');
+  var cartPanel = document.getElementById('cartPanel');
+  var cartBody = document.getElementById('cartBody');
+  var cartFoot = document.getElementById('cartFoot');
+  var cart = loadCart();
+
+  function priceNumber(price){
+    var n = parseInt(String(price).replace(/[^\d]/g, ''), 10);
+    return isNaN(n) ? 0 : n;
+  }
+  function formatNT(n){ return 'NT$' + n; }
+  function loadCart(){
+    try {
+      var raw = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+      if (!Array.isArray(raw)) return [];
+      return raw.filter(function(item){
+        var c = item && BY_ID[item.id];
+        return c && c.flower && c.flower.available && item.qty > 0;
+      }).map(function(item){
+        return { id: item.id, qty: Math.min(99, Math.floor(Number(item.qty)) || 1) };
+      });
+    } catch (err) { return []; }
+  }
+  function saveCart(){
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (err) {}
+  }
+  function cartCount(){
+    return cart.reduce(function(sum, item){ return sum + item.qty; }, 0);
+  }
+  function cartLines(){
+    return cart.map(function(item){
+      var f = BY_ID[item.id].flower;
+      var unit = priceNumber(f.price);
+      return { id: item.id, name: f.name, size: f.size, image: f.image, alt: f.imageAlt || f.name, unit: unit, qty: item.qty, line: unit * item.qty };
+    });
+  }
+  function cartSubtotal(lines){
+    return lines.reduce(function(sum, line){ return sum + line.line; }, 0);
+  }
+  function orderMessage(lines){
+    var rows = ['你好，我想訂購：'];
+    lines.forEach(function(line){
+      rows.push('・' + line.name + '（' + line.size + '）× ' + line.qty + '，' + formatNT(line.line));
+    });
+    rows.push('小計：' + formatNT(cartSubtotal(lines)) + '（運費另計）');
+    rows.push('稱呼：', '手機：', '取貨方式／門市：', '（來自：色彩探索購物車）', '麻煩幫我確認訂單與付款方式，謝謝！');
+    return rows.join('\n');
+  }
+  function pixel(eventName, params){
+    if (typeof window.fbq === 'function') window.fbq('track', eventName, params);
+  }
+  function addToCart(id){
+    var c = BY_ID[id]; if (!c || !c.flower || !c.flower.available) return;
+    var found = null;
+    cart.forEach(function(item){ if (item.id === id) found = item; });
+    if (found) found.qty = Math.min(99, found.qty + 1);
+    else cart.push({ id: id, qty: 1 });
+    saveCart();
+    renderCart();
+    track('add_to_cart', { color: id, content_name: c.flower.name, value: 880, currency: 'TWD' });
+    pixel('AddToCart', { value: 880, currency: 'TWD' });
+  }
+  function setQty(id, qty){
+    qty = Math.max(0, Math.min(99, Math.floor(Number(qty) || 0)));
+    cart = cart.filter(function(item){
+      if (item.id !== id) return true;
+      item.qty = qty;
+      return qty > 0;
+    });
+    saveCart();
+    renderCart('[data-cart="inc"][data-id="' + id + '"]');
+  }
+  function renderCart(focusSelector){
+    var n = cartCount();
+    cartFabCount.textContent = String(n);
+    cartFab.hidden = n < 1;
+    cartFab.setAttribute('aria-label', n ? ('開啟購物車，目前 ' + n + ' 件') : '購物車');
+    var lines = cartLines();
+    if (!lines.length){
+      cartBody.innerHTML = '<div class="cart-empty"><p>購物車是空的。</p><p>選一個顏色，看看想帶走的作品。</p></div>';
+      cartFoot.hidden = true;
+      cartFoot.innerHTML = '';
+    } else {
+      cartBody.innerHTML = lines.map(function(line){
+        return '<article class="cart-item">' +
+          '<img src="' + esc(line.image) + '" alt="' + esc(line.alt) + '" width="72" height="72">' +
+          '<div><h3>' + esc(line.name) + '</h3>' +
+          '<p class="cart-meta">尺寸 ' + esc(line.size) + '</p>' +
+          '<p class="cart-meta cart-unit">' + formatNT(line.unit) + '</p>' +
+          '<div class="cart-row"><div class="cart-qty">' +
+            '<button type="button" class="cart-qtybtn" data-cart="dec" data-id="' + esc(line.id) + '" aria-label="減少「' + esc(line.name) + '」數量"' + (line.qty <= 1 ? ' disabled' : '') + '>−</button>' +
+            '<span>' + line.qty + '</span>' +
+            '<button type="button" class="cart-qtybtn" data-cart="inc" data-id="' + esc(line.id) + '" aria-label="增加「' + esc(line.name) + '」數量">+</button>' +
+          '</div>' +
+          '<button type="button" class="cart-remove" data-cart="remove" data-id="' + esc(line.id) + '">移除</button>' +
+          '</div></div></article>';
+      }).join('');
+      var msg = orderMessage(lines);
+      var checkout = IS_MOBILE
+        ? '<a class="btn btn-primary" data-cart="checkout" href="' + esc('https://line.me/R/oaMessage/' + LINE_ID + '/?' + encodeURIComponent(msg)) + '">用 LINE 送出訂單</a>'
+        : '<button type="button" class="btn btn-primary" data-cart="checkout">用 LINE 送出訂單</button>' +
+          '<button type="button" class="btn btn-secondary" data-cart="copy">複製訂購內容</button>' +
+          '<p class="cart-copy-status" id="cartCopyStatus" role="status" aria-live="polite"></p>';
+      cartFoot.hidden = false;
+      cartFoot.innerHTML = '<p class="cart-sub"><span>小計</span><b>' + formatNT(cartSubtotal(lines)) + '</b></p>' +
+        '<p class="cart-ship">運費與付款方式會在 LINE 上跟你確認。</p>' + checkout;
+    }
+    if (focusSelector){
+      var focusEl = cartDrawer.querySelector(focusSelector);
+      if (focusEl && !focusEl.disabled) focusEl.focus();
+    }
+  }
+  function openCart(){
+    renderCart();
+    cartDrawer.hidden = false;
+    document.body.style.overflow = 'hidden';
+    cartPanel.focus();
+  }
+  function closeCart(){
+    cartDrawer.hidden = true;
+    document.body.style.overflow = '';
+    if (!cartFab.hidden) cartFab.focus();
+  }
+  function checkoutCart(){
+    var lines = cartLines(); if (!lines.length) return;
+    var total = cartSubtotal(lines);
+    track('begin_checkout', { lp_cta: 'cart_line', value: total, currency: 'TWD' });
+    pixel('InitiateCheckout', { value: total, currency: 'TWD' });
+    if (!IS_MOBILE) openWin(LINE_ADD_FRIEND);
+  }
+  function copyOrder(){
+    var lines = cartLines(); if (!lines.length) return;
+    var msg = orderMessage(lines);
+    var status = document.getElementById('cartCopyStatus');
+    copyText(msg).then(function(){
+      if (status) status.textContent = '已複製，請貼到 LINE 對話';
+      track('copy_order', { lp_cta: 'cart_copy' });
+    }, function(){
+      if (!status || status.nextElementSibling) return;
+      status.textContent = '這個瀏覽器無法自動複製，請選取下面的文字複製後，貼到 LINE 對話。';
+      var ta = document.createElement('textarea');
+      ta.className = 'cart-fallback'; ta.readOnly = true; ta.rows = 8; ta.value = msg;
+      status.insertAdjacentElement('afterend', ta); ta.focus(); ta.select();
+    });
+  }
+  cartFab.addEventListener('click', openCart);
+  cartDrawer.addEventListener('click', function(e){
+    var el = e.target.closest('[data-cart]'); if (!el) return;
+    var act = el.dataset.cart;
+    if (act === 'close') { closeCart(); return; }
+    if (act === 'inc') setQty(el.dataset.id, (cart.filter(function(item){ return item.id === el.dataset.id; })[0] || { qty: 0 }).qty + 1);
+    else if (act === 'dec'){
+      var cur = cart.filter(function(item){ return item.id === el.dataset.id; })[0];
+      if (cur && cur.qty > 1) setQty(el.dataset.id, cur.qty - 1);
+    } else if (act === 'remove') setQty(el.dataset.id, 0);
+    else if (act === 'checkout') checkoutCart();
+    else if (act === 'copy') copyOrder();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !cartDrawer.hidden) closeCart();
+  });
+  renderCart();
+
   result.addEventListener('click', function(e){
     var el = e.target.closest('[data-action]'); if (!el || !state.color) return;
     var c = BY_ID[state.color], act = el.dataset.action;
     if (act === 'copy'){
       var txt = c.keywords.map(function(k){ return '#' + k; }).join(' ');
       (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function(){ el.textContent = '已複製'; }, function(){ el.textContent = txt; });
-    } else if (act === 'copy-order'){
-      var orderText = flowerBuyText(c.flower, c);
-      var status = el.closest('.rc-flower-buy').querySelector('.rc-order-status');
-      copyText(orderText).then(function(){
-        if (status) status.textContent = '已複製，請貼到 LINE 對話';
-        el.textContent = '已複製訂購內容';
-        track('copy_order', { lp_cta: 'flower_copy', color: c.id, content_name: c.flower.name });
-      }, function(){
-        // 瀏覽器不允許複製時，直接顯示文字讓客人自己選取複製
-        if (status && !status.nextElementSibling){
-          status.textContent = '這個瀏覽器無法自動複製，請選取下面的文字複製後，貼到 LINE 對話。';
-          var ta = document.createElement('textarea');
-          ta.className = 'rc-order-fallback'; ta.readOnly = true; ta.rows = 10; ta.value = orderText;
-          status.insertAdjacentElement('afterend', ta); ta.focus(); ta.select();
-        }
-      });
+    } else if (act === 'add-cart'){
+      addToCart(c.id);
+      var added = el.closest('.rc-flower-buy').querySelector('.rc-added');
+      if (added) added.textContent = '已加入購物車';
     } else if (act === 'share-line'){
       track('share', { method: 'line', content_type: 'color_result', item_id: c.id, color: c.id });
       openWin('https://line.me/R/share?text=' + encodeURIComponent('說說花 Colorflower Say｜我今天的顏色是' + c.displayName + '\n' + shareUrl(c.id, 'line')));
