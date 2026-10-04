@@ -215,12 +215,10 @@ section[id]{scroll-margin-top:72px}
 /* ===== HERO 瓶子（使用者提供的彩油瓶照片） ===== */
 .hero-bottles{position:relative;z-index:1;width:100%;display:flex;justify-content:center;align-items:flex-end;gap:12px}
 .hero-bottles{gap:14px}
-.hb{position:relative;display:flex;flex-direction:column;align-items:center;width:64px;animation:float 6s ease-in-out infinite}
-.hb img{display:block;width:100%;height:auto;opacity:.88;filter:saturate(.8) drop-shadow(0 8px 10px rgba(90,56,32,.14))}
+.hb{display:block;width:64px;height:auto;opacity:.88;filter:saturate(.8) drop-shadow(0 8px 10px rgba(90,56,32,.14));animation:float 6s ease-in-out infinite}
 .hb2{width:82px;margin-bottom:3px;animation-delay:-2s}
 .hb3{animation-delay:-4s}
 .bottle-no{display:block;margin-top:4px;text-align:center;font-family:var(--sans);font-size:12px;font-weight:500;line-height:1.2;letter-spacing:.04em;color:var(--ink-grey-text);white-space:nowrap;transition:transform .35s ease}
-.hb .bottle-no{position:absolute;top:100%;left:0;right:0;margin-top:3px;color:var(--paper);font-size:11px;letter-spacing:.06em;text-shadow:0 1px 2px rgba(90,56,32,.4)}
 
 /* ===== 04 色彩探索：互動選色 ===== */
 .picker{position:relative;height:460px;max-width:360px;margin:32px auto 0}
@@ -340,7 +338,6 @@ section[id]{scroll-margin-top:72px}
   .pick img{width:78px}
   .pick .bottle-no{margin-top:6px;font-size:13px}
   .hb{width:86px} .hb2{width:108px}
-  .hb .bottle-no{font-size:12px;margin-top:4px}
   .hero-bottles{gap:20px}
   .result-card{padding:40px 36px 32px}
   .rc-grid{grid-template-columns:1fr 1fr}
@@ -483,9 +480,9 @@ section[id]{scroll-margin-top:72px}
     <div class="hero-visual" role="img" aria-label="Aura-Soma 平衡油：B4 陽光瓶、B5 日落瓶、B20 星星的小孩">
       <div class="shelf"></div>
       <div class="hero-bottles" aria-hidden="true">
-        <span class="hb hb1"><img src="bottles/b4.png" alt="" width="210" height="360"><span class="bottle-no">B4</span></span>
-        <span class="hb hb2"><img src="bottles/b5.png" alt="" width="201" height="360"><span class="bottle-no">B5</span></span>
-        <span class="hb hb3"><img src="bottles/b20.png" alt="" width="209" height="360"><span class="bottle-no">B20</span></span>
+        <img class="hb hb1" src="bottles/b4.png" alt="" width="210" height="360">
+        <img class="hb hb2" src="bottles/b5.png" alt="" width="201" height="360">
+        <img class="hb hb3" src="bottles/b20.png" alt="" width="209" height="360">
       </div>
     </div>
   </div>
