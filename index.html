@@ -215,17 +215,20 @@ section[id]{scroll-margin-top:72px}
 /* ===== HERO 瓶子（使用者提供的彩油瓶照片） ===== */
 .hero-bottles{position:relative;z-index:1;width:100%;display:flex;justify-content:center;align-items:flex-end;gap:12px}
 .hero-bottles{gap:14px}
-.hb{display:block;width:64px;height:auto;opacity:.88;filter:saturate(.8) drop-shadow(0 8px 10px rgba(90,56,32,.14));animation:float 6s ease-in-out infinite}
+.hb{position:relative;display:flex;flex-direction:column;align-items:center;width:64px;animation:float 6s ease-in-out infinite}
+.hb img{display:block;width:100%;height:auto;opacity:.88;filter:saturate(.8) drop-shadow(0 8px 10px rgba(90,56,32,.14))}
 .hb2{width:82px;margin-bottom:3px;animation-delay:-2s}
 .hb3{animation-delay:-4s}
+.bottle-no{display:block;margin-top:4px;text-align:center;font-family:var(--sans);font-size:12px;font-weight:500;line-height:1.2;letter-spacing:.04em;color:var(--ink-grey-text);white-space:nowrap;transition:transform .35s ease}
+.hb .bottle-no{position:absolute;top:100%;left:0;right:0;margin-top:3px;color:var(--paper);font-size:11px;letter-spacing:.06em;text-shadow:0 1px 2px rgba(90,56,32,.4)}
 
 /* ===== 04 色彩探索：互動選色 ===== */
-.picker{position:relative;height:410px;max-width:360px;margin:32px auto 0}
+.picker{position:relative;height:460px;max-width:360px;margin:32px auto 0}
 .pick{position:absolute;left:var(--x);top:var(--y);width:22%;display:flex;flex-direction:column;align-items:center;background:none;border:0;padding:4px 0;cursor:pointer;font:inherit;color:inherit;border-radius:var(--r-md);transition:opacity .3s ease}
 .pick .fl{display:block;animation:float 5.5s ease-in-out infinite;animation-delay:var(--d)}
 .pick img{display:block;width:62px;height:auto;filter:drop-shadow(0 10px 12px rgba(35,37,34,.16));transition:transform .35s ease}
-.pick:hover img,.pick:focus-visible img{transform:translateY(-10px)}
-.pick[aria-pressed="true"] img{transform:translateY(-10px)}
+.pick:hover img,.pick:focus-visible img,.pick:hover .bottle-no,.pick:focus-visible .bottle-no{transform:translateY(-10px)}
+.pick[aria-pressed="true"] img,.pick[aria-pressed="true"] .bottle-no{transform:translateY(-10px)}
 .picker.has-selection .pick:not([aria-pressed="true"]){opacity:.6}
 .picker.has-selection .pick:not([aria-pressed="true"]):hover{opacity:1}
 .picker-hint{text-align:center;margin-top:8px}
@@ -234,7 +237,9 @@ section[id]{scroll-margin-top:72px}
 .result{margin-top:40px;scroll-margin-top:84px}
 .result-card{background:var(--paper-light);border:1px solid rgba(35,37,34,.08);border-radius:var(--r-lg);padding:28px 20px 24px}
 .rc-head{display:flex;gap:18px;align-items:center;padding-bottom:22px;border-bottom:1px solid var(--clay)}
+.rc-bottle-col{flex:none;display:flex;flex-direction:column;align-items:center}
 .rc-bottle{width:64px;height:auto;flex:none;filter:drop-shadow(0 8px 10px rgba(35,37,34,.14))}
+.rc-bottle-col .bottle-no{margin-top:6px}
 .rc-title{display:flex;align-items:center;gap:10px;font-size:30px;line-height:1.3;margin-top:8px}
 .rc-title .dot{width:12px;height:12px;border-radius:50%;background:var(--dot);flex:none}
 .rc-bottle-name{font-family:var(--serif);font-weight:500;font-size:16px;line-height:1.5;margin-top:4px}
@@ -333,11 +338,14 @@ section[id]{scroll-margin-top:72px}
   .picker{height:auto;max-width:980px;display:flex;justify-content:space-between;align-items:flex-start;margin-top:40px}
   .pick{position:relative;left:auto;top:auto;width:auto;flex:1;margin-top:var(--dy)}
   .pick img{width:78px}
+  .pick .bottle-no{margin-top:6px;font-size:13px}
   .hb{width:86px} .hb2{width:108px}
+  .hb .bottle-no{font-size:12px;margin-top:4px}
   .hero-bottles{gap:20px}
   .result-card{padding:40px 36px 32px}
   .rc-grid{grid-template-columns:1fr 1fr}
   .rc-bottle{width:80px}
+  .rc-bottle-col .bottle-no{font-size:13px}
   .rc-block.is-available,.rc-grid.has-shop>.rc-block:nth-child(5){grid-column:1 / -1}   /* 有可購買作品時，05、06 各佔整列，避免右邊空一格 */
   .rc-flower-buy{grid-template-columns:5fr 7fr;gap:32px;align-items:center}
   .rc-flower-img{max-width:none}
@@ -475,9 +483,9 @@ section[id]{scroll-margin-top:72px}
     <div class="hero-visual" role="img" aria-label="Aura-Soma 平衡油：B4 陽光瓶、B5 日落瓶、B20 星星的小孩">
       <div class="shelf"></div>
       <div class="hero-bottles" aria-hidden="true">
-        <img class="hb hb1" src="bottles/b4.png" alt="" width="210" height="360">
-        <img class="hb hb2" src="bottles/b5.png" alt="" width="201" height="360">
-        <img class="hb hb3" src="bottles/b20.png" alt="" width="209" height="360">
+        <span class="hb hb1"><img src="bottles/b4.png" alt="" width="210" height="360"><span class="bottle-no">B4</span></span>
+        <span class="hb hb2"><img src="bottles/b5.png" alt="" width="201" height="360"><span class="bottle-no">B5</span></span>
+        <span class="hb hb3"><img src="bottles/b20.png" alt="" width="209" height="360"><span class="bottle-no">B20</span></span>
       </div>
     </div>
   </div>
@@ -531,26 +539,26 @@ section[id]{scroll-margin-top:72px}
       <p class="muted">不用想太久，第一眼吸引你的顏色，就是今天的入口。這不是測驗，也沒有正確答案。</p>
     </div>
     <div class="picker" id="picker" role="group" aria-label="選一個現在吸引你的顏色">
-      <button type="button" class="pick" data-color="red" aria-pressed="false" aria-controls="result" style="--x:1%;--y:183px;--dy:84px;--d:0s" aria-label="紅色，B5 Sunset Bottle 日落瓶">
-        <span class="fl"><img src="bottles/b5.png" alt="" width="210" height="360"></span>
+      <button type="button" class="pick" data-color="red" aria-pressed="false" aria-controls="result" style="--x:1%;--y:210px;--dy:84px;--d:0s" aria-label="紅色，B5 Sunset Bottle 日落瓶">
+        <span class="fl"><img src="bottles/b5.png" alt="" width="210" height="360"><span class="bottle-no">B5</span></span>
       </button>
       <button type="button" class="pick" data-color="orange" aria-pressed="false" aria-controls="result" style="--x:8.5%;--y:56px;--dy:34px;--d:-1.2s" aria-label="橘色，B26 Etheric Rescue 乙太解救">
-        <span class="fl"><img src="bottles/b26.png" alt="" width="210" height="360"></span>
+        <span class="fl"><img src="bottles/b26.png" alt="" width="210" height="360"><span class="bottle-no">B26</span></span>
       </button>
       <button type="button" class="pick" data-color="yellow" aria-pressed="false" aria-controls="result" style="--x:39%;--y:0px;--dy:8px;--d:-2.4s" aria-label="黃色，B4 Sunlight Bottle 陽光瓶">
-        <span class="fl"><img src="bottles/b4.png" alt="" width="210" height="360"></span>
+        <span class="fl"><img src="bottles/b4.png" alt="" width="210" height="360"><span class="bottle-no">B4</span></span>
       </button>
       <button type="button" class="pick" data-color="green" aria-pressed="false" aria-controls="result" style="--x:69.5%;--y:56px;--dy:0px;--d:-3.6s" aria-label="綠色，B3 Heart Bottle 心輪瓶">
-        <span class="fl"><img src="bottles/b3.png" alt="" width="210" height="360"></span>
+        <span class="fl"><img src="bottles/b3.png" alt="" width="210" height="360"><span class="bottle-no">B3</span></span>
       </button>
-      <button type="button" class="pick" data-color="blue" aria-pressed="false" aria-controls="result" style="--x:77%;--y:183px;--dy:8px;--d:-0.6s" aria-label="藍色，B2 Peace Bottle 和平瓶">
-        <span class="fl"><img src="bottles/b2.png" alt="" width="210" height="360"></span>
+      <button type="button" class="pick" data-color="blue" aria-pressed="false" aria-controls="result" style="--x:77%;--y:210px;--dy:8px;--d:-0.6s" aria-label="藍色，B2 Peace Bottle 和平瓶">
+        <span class="fl"><img src="bottles/b2.png" alt="" width="210" height="360"><span class="bottle-no">B2</span></span>
       </button>
-      <button type="button" class="pick" data-color="indigo" aria-pressed="false" aria-controls="result" style="--x:55.9%;--y:285px;--dy:34px;--d:-1.8s" aria-label="寶藍色，B1 Physical Rescue 身體解救">
-        <span class="fl"><img src="bottles/b1.png" alt="" width="210" height="360"></span>
+      <button type="button" class="pick" data-color="indigo" aria-pressed="false" aria-controls="result" style="--x:55.9%;--y:312px;--dy:34px;--d:-1.8s" aria-label="寶藍色，B1 Physical Rescue 身體解救">
+        <span class="fl"><img src="bottles/b1.png" alt="" width="210" height="360"><span class="bottle-no">B1</span></span>
       </button>
-      <button type="button" class="pick" data-color="purple" aria-pressed="false" aria-controls="result" style="--x:22.1%;--y:285px;--dy:84px;--d:-3s" aria-label="紫色，B20 Star Child 星星的小孩">
-        <span class="fl"><img src="bottles/b20.png" alt="" width="210" height="360"></span>
+      <button type="button" class="pick" data-color="purple" aria-pressed="false" aria-controls="result" style="--x:22.1%;--y:312px;--dy:84px;--d:-3s" aria-label="紫色，B20 Star Child 星星的小孩">
+        <span class="fl"><img src="bottles/b20.png" alt="" width="210" height="360"><span class="bottle-no">B20</span></span>
       </button>
     </div>
     <p class="picker-hint small muted">點一支瓶子，結果會在下方展開。</p>
@@ -1033,7 +1041,7 @@ section[id]{scroll-margin-top:72px}
     return '' +
     '<article class="result-card" style="--dot:' + esc(c.dot) + '">' +
       '<header class="rc-head">' +
-        '<img class="rc-bottle" src="bottles/' + esc(c.file) + '" alt="' + esc(c.bottle.sku + ' ' + c.bottle.officialName) + '">' +
+        '<div class="rc-bottle-col"><img class="rc-bottle" src="bottles/' + esc(c.file) + '" alt="' + esc(c.bottle.sku + ' ' + c.bottle.officialName) + '"><span class="bottle-no">' + esc(c.bottle.sku) + '</span></div>' +
         '<div>' +
           '<div class="eyebrow">Your Color · ' + c.no + '</div>' +
           '<h3 class="rc-title"><span class="dot" aria-hidden="true"></span>' + esc(c.displayName) + '</h3>' +
