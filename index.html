@@ -265,11 +265,29 @@ section[id]{scroll-margin-top:72px}
 .rc-price{font-family:var(--latin);font-weight:600;font-size:22px;line-height:1.2;color:var(--ink);letter-spacing:.04em;font-variant-numeric:lining-nums}
 .rc-flower-actions{display:flex;gap:8px;margin-top:18px}
 .rc-flower-actions .btn{flex:1 1 0;min-width:0;margin:0;padding:0 12px}
-/* 購物車：有作品才出現的懸浮按鈕，以及同一頁的抽屜 */
-.cart-fab{position:fixed;right:16px;bottom:calc(78px + env(safe-area-inset-bottom));z-index:35;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border:0;border-radius:var(--r-pill);background:#232522;color:#fff;font:inherit;font-size:15px;font-weight:500;letter-spacing:.08em;cursor:pointer;box-shadow:0 8px 24px rgba(35,37,34,.18)}
+/* 購物車：車裡有作品才出現的懸浮按鈕（右下、圓角），以及同一頁的抽屜。
+   花藝介紹層是 70，按鈕要更高才點得到；抽屜再更高，才不會被按鈕蓋住「用 LINE 送出訂單」。 */
+.cart-fab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));z-index:75;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 18px;border:0;border-radius:var(--r-pill);background:#232522;color:#fff;font:inherit;font-size:15px;font-weight:500;letter-spacing:.08em;cursor:pointer;box-shadow:0 8px 24px rgba(35,37,34,.18)}
+.cart-fab-icon{display:none;flex:none}
+body.sticky-on .cart-fab{bottom:calc(78px + env(safe-area-inset-bottom))}
+/* 手機花藝介紹是底部抽屜，「加入購物車」在內容裡。按鈕改放左上安全區，避開那個按鈕，也避開右上的「關閉」。 */
+body.flower-open .cart-fab{top:calc(12px + env(safe-area-inset-top));bottom:auto;left:max(16px,env(safe-area-inset-left));right:auto}
 .cart-fab-count{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:var(--r-pill);background:#FBF8F2;color:#232522;font-size:13px;font-weight:700;letter-spacing:0;font-variant-numeric:lining-nums}
+/* 手機頁面本身：圓形小按鈕靠右下角，才不會壓到並排的「加入購物車／看花藝介紹」和 LINE 按鈕。
+   花藝介紹打開時改回「購物車＋件數」，並把抽屜頂端讓出一條，按鈕就落在介紹面板上方。 */
+@media (max-width:767px){
+  .cart-fab{width:48px;height:48px;min-height:48px;padding:0;gap:0;right:max(12px,env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom))}
+  .cart-fab-icon{display:block}
+  .cart-fab-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .cart-fab-count{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;box-shadow:0 0 0 2px #232522}
+  body.flower-open .cart-fab{width:auto;height:auto;padding:0 16px;gap:8px}
+  body.flower-open .cart-fab-icon{display:none}
+  body.flower-open .cart-fab-label{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto}
+  body.flower-open .cart-fab-count{position:static;top:auto;right:auto;box-shadow:none}
+  body.flower-open.cart-has-items .flower-sheet-panel{max-height:calc(100vh - 72px - env(safe-area-inset-top));max-height:calc(100dvh - 72px - env(safe-area-inset-top))}
+}
 .cart-fab[hidden],.cart-drawer[hidden]{display:none!important}
-.cart-drawer{position:fixed;inset:0;z-index:60}
+.cart-drawer{position:fixed;inset:0;z-index:85}
 .cart-backdrop{position:absolute;inset:0;background:rgba(35,37,34,.45);border:0;padding:0}
 .cart-panel{position:absolute;top:0;right:0;bottom:0;width:min(100%,440px);background:#FBF8F2;color:#232522;display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(35,37,34,.16)}
 .cart-panel:focus{outline:none}
@@ -358,7 +376,8 @@ section[id]{scroll-margin-top:72px}
   .final .btns{flex-direction:row;justify-content:center;max-width:none}
   .footer-grid{grid-template-columns:1.4fr 1fr 1fr}
   .sticky-cta{display:none}
-  .cart-fab{bottom:24px}
+  .cart-fab,body.sticky-on .cart-fab{top:auto;bottom:24px;left:auto;right:max(16px,env(safe-area-inset-right))}
+  body.flower-open .cart-fab{top:calc(12px + env(safe-area-inset-top));bottom:auto;left:max(16px,env(safe-area-inset-left));right:auto}
   .flow{grid-template-columns:repeat(4,1fr)}
 }
 /* ---------- desktop ---------- */
@@ -400,6 +419,8 @@ section[id]{scroll-margin-top:72px}
   .faq-list{margin-top:0}
   .final h2{font-size:48px}
   .footer{padding:72px 0 36px}
+  /* 寬螢幕的花藝介紹是置中對話框，右下角有空位，按鈕回到右下，不壓到對話框裡的按鈕 */
+  body.flower-open .cart-fab{top:auto;bottom:24px;left:auto;right:max(16px,env(safe-area-inset-right))}
 }
 </style>
 <!-- ===== 追蹤碼（GA4 + Meta Pixel，不使用 GTM）=====
@@ -696,8 +717,8 @@ section[id]{scroll-margin-top:72px}
   <a class="btn btn-primary btn-block js-line" id="stickyLine" data-cta="sticky" href="https://line.me/R/ti/p/@917voqon" tabindex="-1" hidden>加 LINE 預約・詢問 <span class="arr" aria-hidden="true">→</span></a>
 </div>
 
-<!-- 花藝購物車：有作品才顯示按鈕；抽屜在同一頁，不另開結帳頁 -->
-<button type="button" class="cart-fab" id="cartFab" hidden aria-haspopup="dialog" aria-controls="cartPanel">購物車 <span class="cart-fab-count" id="cartFabCount">0</span></button>
+<!-- 花藝購物車：車裡有作品才顯示懸浮按鈕；花藝介紹打開時按鈕仍在最上層，點了會關掉介紹並打開購物車 -->
+<button type="button" class="cart-fab" id="cartFab" hidden aria-haspopup="dialog" aria-controls="cartPanel"><svg class="cart-fab-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M6.5 8.5h11l-.9 11h-9.2l-.9-11z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8.5V7.2a3 3 0 0 1 6 0v1.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="cart-fab-label">購物車</span> <span class="cart-fab-count" id="cartFabCount">0</span></button>
 <div class="cart-drawer" id="cartDrawer" hidden>
   <div class="cart-backdrop" data-cart="close"></div>
   <div class="cart-panel" id="cartPanel" role="dialog" aria-modal="true" aria-labelledby="cartTitle" tabindex="-1">
@@ -1236,6 +1257,7 @@ section[id]{scroll-margin-top:72px}
     var n = cartCount();
     cartFabCount.textContent = String(n);
     cartFab.hidden = n < 1;
+    document.body.classList.toggle('cart-has-items', n >= 1);
     cartFab.setAttribute('aria-label', n ? ('開啟購物車，目前 ' + n + ' 件') : '購物車');
     var lines = cartLines();
     if (!lines.length){
@@ -1274,7 +1296,9 @@ section[id]{scroll-margin-top:72px}
   }
   function openCart(){
     renderCart();
+    /* 先打開購物車再關花藝介紹，捲動鎖不會中途放開；介紹在購物車底下，關掉後就只剩購物車 */
     cartDrawer.hidden = false;
+    if (!flowerSheet.hidden) closeFlowerIntro(true);
     document.body.style.overflow = 'hidden';
     cartPanel.focus();
   }
@@ -1289,10 +1313,12 @@ section[id]{scroll-margin-top:72px}
     flowerIntroTrigger = trigger || null;
     flowerSheetBody.innerHTML = renderFlowerIntro(c);
     flowerSheet.hidden = false;
+    document.body.classList.add('flower-open');
     document.body.style.overflow = 'hidden';
     flowerSheetPanel.focus();
   }
   function closeFlowerIntro(silent){
+    document.body.classList.remove('flower-open');
     if (flowerSheet.hidden) return;
     flowerSheet.hidden = true;
     flowerSheetBody.innerHTML = '';
@@ -1344,9 +1370,10 @@ section[id]{scroll-margin-top:72px}
       flashCartAdded(el);
     }
   });
-  flowerSheet.addEventListener('keydown', function(e){
+  document.addEventListener('keydown', function(e){
     if (flowerSheet.hidden || e.key !== 'Tab') return;
     var list = Array.prototype.filter.call(flowerSheetPanel.querySelectorAll('button, a[href]'), function(node){ return !node.disabled; });
+    if (!cartFab.hidden) list.push(cartFab);
     if (!list.length) return;
     var first = list[0], last = list[list.length - 1];
     if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
@@ -1354,8 +1381,8 @@ section[id]{scroll-margin-top:72px}
   });
   document.addEventListener('keydown', function(e){
     if (e.key !== 'Escape') return;
-    if (!flowerSheet.hidden){ closeFlowerIntro(); return; }
-    if (!cartDrawer.hidden) closeCart();
+    if (!cartDrawer.hidden){ closeCart(); return; }
+    if (!flowerSheet.hidden) closeFlowerIntro();
   });
   renderCart();
 
@@ -1406,6 +1433,7 @@ section[id]{scroll-margin-top:72px}
     var show = heroGone && !inExplore;
     sEx.hidden = !!state.color; sLine.hidden = !state.color;
     bar.classList.toggle('show', show); bar.setAttribute('aria-hidden', String(!show));
+    document.body.classList.toggle('sticky-on', show);
     sEx.tabIndex = sLine.tabIndex = show ? 0 : -1;
   }
   window.addEventListener('scroll', updSticky, { passive: true }); updSticky();
